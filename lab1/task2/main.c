@@ -4,7 +4,14 @@
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
-    char* arguments = extractArguments(argc, argv);
+    int status;
+
+    char* arguments[argc];
+    for (int i = 1; i < argc; i++) {
+        arguments[i - 1] = argv[i];
+    }
+    arguments[argc - 1] = NULL;
+
     int pid = fork();
     if (pid == 0) {
         execvp(argv[1], arguments);
@@ -19,14 +26,4 @@ int main(int argc, char *argv[]) {
     }
 
     return 0;
-}
-
-char* extractArguments(int argc, char *argv[]) {
-    char* arguments[argc];
-    for (int i = 1; i < argc; i++) {
-        arguments[i - 1] = argv[i];
-    }
-    arguments[argc - 1] = NULL;
-
-    return arguments;
 }
