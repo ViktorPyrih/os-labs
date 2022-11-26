@@ -21,8 +21,7 @@ void executeFork(char* processTree, size_t treeSize) {
             if (currentNode == ')') {
                 depth--;
             }
-        }
-        else if (currentNode == '.') {
+        } else if (currentNode == '.') {
             if (isPrevDot && pid == 0) {
                 return;
             }
